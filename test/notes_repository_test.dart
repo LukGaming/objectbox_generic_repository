@@ -11,8 +11,9 @@ void main() async {
   final noteBox = store.box<Note>();
 
   final _notesRepository = NotesRepository(
-    noteBox,
-    Note_.objId,
+    box: noteBox,
+    noteEntityObjId: Note_.id,
+    noteEntityId: Note_.objId,
   );
 
   test("creating a note", () async {

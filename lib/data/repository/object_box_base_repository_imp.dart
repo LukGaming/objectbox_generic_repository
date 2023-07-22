@@ -16,8 +16,13 @@ abstract class BaseRepository<E extends ObjectBoxBaseModel>
     implements IRepository<E> {
   final dynamic box;
   final QueryIntegerProperty<E> entityId;
+  final QueryStringProperty<E> entityObjId;
 
-  BaseRepository(this.box, this.entityId);
+  BaseRepository({
+    required this.box,
+    required this.entityId,
+    required this.entityObjId,
+  });
 
   @override
   Future<E> getById(int id) async {
@@ -59,12 +64,14 @@ abstract class BaseRepository<E extends ObjectBoxBaseModel>
 }
 
 class NotesRepository extends BaseRepository<Note> {
-  NotesRepository(
-    dynamic box,
-    QueryIntegerProperty<Note> noteEntityId,
-  ) : super(
-          box,
-          noteEntityId,
+  NotesRepository({
+    required dynamic box,
+    required QueryIntegerProperty<Note> noteEntityId,
+    required QueryStringProperty<Note> noteEntityObjId,
+  }) : super(
+          box: box,
+          entityId: noteEntityId,
+          entityObjId: noteEntityObjId,
         );
 
   Future<List<Note>> getNotesByTitle(String title) async {

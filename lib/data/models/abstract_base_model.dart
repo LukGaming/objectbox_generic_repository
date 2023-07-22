@@ -4,5 +4,8 @@ abstract class ObjectBoxBaseModel {
   @Id()
   int? objId;
   String? id;
-  ObjectBoxBaseModel({required this.id, required this.objId});
+  ObjectBoxBaseModel({
+    required this.id,
+    required this.objId,
+  });
 }
