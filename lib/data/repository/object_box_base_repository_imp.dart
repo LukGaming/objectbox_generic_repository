@@ -3,7 +3,7 @@ import 'package:test_mobx/data/models/abstract_base_model.dart';
 import 'package:test_mobx/data/models/note.dart';
 import 'package:test_mobx/objectbox.g.dart';
 
-abstract class IRepository<E extends AbstractObjectBoxBaseModel> {
+abstract class IRepository<E extends ObjectBoxBaseModel> {
   Future<E> getById(int id);
   Future<List<E>> getAll();
   Future<int> create(E obj);
@@ -12,7 +12,7 @@ abstract class IRepository<E extends AbstractObjectBoxBaseModel> {
   Future<void> deleteAll();
 }
 
-abstract class BaseRepository<E extends AbstractObjectBoxBaseModel>
+abstract class BaseRepository<E extends ObjectBoxBaseModel>
     implements IRepository<E> {
   final dynamic box;
   final QueryIntegerProperty<E> entityId;
