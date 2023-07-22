@@ -12,11 +12,16 @@ void main() async {
 
   final _notesRepository = NotesRepository(
     noteBox,
-    Note_.id,
+    Note_.objId,
   );
 
   test("creating a note", () async {
-    final Note note = Note(title: "title", body: "body");
+    final Note note = Note(
+      id: "1",
+      objId: null,
+      title: "title",
+      body: "body",
+    );
     await _notesRepository.create(note);
   });
 
@@ -27,9 +32,12 @@ void main() async {
 
   test("get an noteBy iD", () async {
     final Note noteToCreate = Note(
+      id: "1",
+      objId: null,
       title: "title",
       body: "body",
     );
+
     int createdNoteId = await _notesRepository.create(noteToCreate);
     DateTime initialTime = DateTime.now();
     Note getNote = await _notesRepository.getById(createdNoteId);
@@ -38,7 +46,12 @@ void main() async {
   });
 
   test("delete an note", () async {
-    final Note note = Note(title: "title", body: "body");
+    final Note note = Note(
+      id: "1",
+      objId: null,
+      title: "title",
+      body: "body",
+    );
     int createdNoteId = await _notesRepository.create(note);
 
     await _notesRepository
@@ -47,6 +60,8 @@ void main() async {
 
   test("get an note by title", () async {
     final Note note = Note(
+      id: "1",
+      objId: null,
       title: "note by title",
       body: "body",
     );
@@ -62,6 +77,8 @@ void main() async {
 
   test("get an non existent note", () async {
     final Note note = Note(
+      id: "1",
+      objId: null,
       title: "note by title",
       body: "body",
     );
@@ -77,6 +94,8 @@ void main() async {
   test("get note by body", () async {
     const bodyText = "body test";
     final Note note = Note(
+      id: "1",
+      objId: null,
       title: "note by title",
       body: bodyText,
     );
@@ -90,6 +109,8 @@ void main() async {
     const bodyText = "body test";
     for (int i = 0; i < 1000; i++) {
       final Note note = Note(
+        id: i.toString(),
+        objId: null,
         title: "note by title",
         body: bodyText,
       );

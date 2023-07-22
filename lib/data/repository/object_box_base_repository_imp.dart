@@ -1,17 +1,19 @@
 import 'package:objectbox/internal.dart';
+import 'package:test_mobx/data/models/abstract_base_model.dart';
 import 'package:test_mobx/data/models/note.dart';
 import 'package:test_mobx/objectbox.g.dart';
 
-abstract class IRepository<E> {
+abstract class IRepository<E extends AbstractObjectBoxBaseModel> {
   Future<E> getById(int id);
   Future<List<E>> getAll();
   Future<int> create(E obj);
   Future<int> update(E obj);
-  Future<void> delete(E entity);
+  Future<void> delete(E obj);
   Future<void> deleteAll();
 }
 
-abstract class BaseRepository<E> implements IRepository<E> {
+abstract class BaseRepository<E extends AbstractObjectBoxBaseModel>
+    implements IRepository<E> {
   final dynamic box;
   final QueryIntegerProperty<E> entityId;
 
@@ -43,8 +45,8 @@ abstract class BaseRepository<E> implements IRepository<E> {
   }
 
   @override
-  Future<void> delete(dynamic entity) async {
-    box.remove(entity.id);
+  Future<void> delete(E obj) async {
+    box.remove(obj.objId);
   }
 
   @override
